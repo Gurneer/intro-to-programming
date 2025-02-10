@@ -1,0 +1,13 @@
+@Todos.Api_HostAddress = http://localhost:1337
+
+GET {{Todos.Api_HostAddress}}/todos
+Accept: application/json
+
+###
+
+POST {{Todos.Api_HostAddress}}/todos
+Content-Type: application/json
+
+{
+    "description": "Clean Garage"
+}
