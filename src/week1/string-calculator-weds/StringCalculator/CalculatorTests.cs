@@ -1,7 +1,11 @@
 ﻿
 
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Metrics;
+using System.Drawing;
 using System.Runtime.Intrinsics.X86;
+using NSubstitute.Core;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace StringCalculator;
 public class CalculatorTests
@@ -66,6 +70,21 @@ public class CalculatorTests
     {
         var calculator = new Calculator();
         var result = calculator.AddNumbersWithMixDelimiters(numbers);
+        Assert.Equal(expected, result);
+    }
+
+    //   Custom delimeters.Users can use any single letter delimeter they'd like, and they indicate it by passing an argument to add in the following form:
+    //- If they want to use an hash/pound/octothorpe as their delimeter, they would pass:
+    //	- `Add("//#\n1#2#3") => 6`
+    //	- All previous delimeters are still supported, so, for example
+    //	- `Add("//#\n1#2,3\n1") => 7`
+    [Theory]
+    [InlineData("//#\n1#2#3", 6)]
+    [InlineData("//#\n1#2,3\n1", 7)]
+    public void AddingWithAnyCustomDelimeter(string numbers, int expected)
+    {
+        var calculator = new Calculator();
+        var result = calculator.AddNumbersWithAnyCustomDelimeter(numbers);
         Assert.Equal(expected, result);
     }
 }

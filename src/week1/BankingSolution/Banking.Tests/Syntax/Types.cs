@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
 
 namespace Banking.Tests.Syntax;
 
@@ -16,10 +13,10 @@ public class Types
         // type identifier [= initializer]
         var age = 55;
 
-
+       
         int dogAge;
 
-
+       
 
 
         var yourAge = 16.5;
@@ -28,7 +25,7 @@ public class Types
 
         // a variable in a strictly typed language cannot change it's type.
 
-
+      
         Assert.Equal("Bob", Name);
 
 

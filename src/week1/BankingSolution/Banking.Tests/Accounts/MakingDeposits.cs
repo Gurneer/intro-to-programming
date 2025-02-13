@@ -1,27 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
 using Banking.Domain;
+using Banking.Tests.TestDoubles;
+
 namespace Banking.Tests.Accounts;
 public class MakingDeposits
 {
+
     [Fact]
-    public void MakingADepositIncreasesBalance()
+    public void MakingADepositIncreasesBalance() 
     {
-        //given
-        var account = new Account();
+        // given
+        var account = new Account(new DummyBonusCalculator()); // <--- _balance = 5000
         var openingBalance = account.GetBalance();
         var amountToDeposit = 100.10M;
 
-        //when
+        // when
         account.Deposit(amountToDeposit);
 
-        //then
+        // then
+
         var newBalance = account.GetBalance();
 
-        Assert.Equal(amountToDeposit + openingBalance, account.GetBalance());   
+      
 
+        Assert.Equal(amountToDeposit + openingBalance, account.GetBalance());
+        
+    }
+
+    [Fact]
+    public void CannotDepositNegativeNumbers()
+    {
+        var account = new Account(new DummyBonusCalculator());
+
+        Assert.Throws<AccountNegativeTransactionAmountException>(() => account.Deposit(-1));
     }
 }
