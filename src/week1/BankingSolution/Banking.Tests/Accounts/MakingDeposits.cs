@@ -1,4 +1,4 @@
-﻿
+
 
 using Banking.Domain;
 using Banking.Tests.TestDoubles;
@@ -35,4 +35,6 @@ public class MakingDeposits
 
         Assert.Throws<AccountNegativeTransactionAmountException>(() => account.Deposit(-1));
     }
+
+ 
 }

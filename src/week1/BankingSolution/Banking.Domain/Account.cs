@@ -21,19 +21,18 @@ public class Account
     { 
         return _currentBalance;
     }
-    public void Deposit(decimal amountToDeposit)
+    public void Deposit(AccountTransactionAmount amountToDeposit)
     {
-        
-        CheckTransactionAmount(amountToDeposit);
-
         var bonus = _bonusCalculator.CalculateBonusForDeposit( _currentBalance, amountToDeposit);
         _currentBalance += amountToDeposit + bonus;
     }
 
+ 
+
     // Commands - telling our account to do some work.
-    public void Withdraw(decimal amountToWithdraw)
+    public void Withdraw(AccountTransactionAmount amountToWithdraw)
     {
-        CheckTransactionAmount(amountToWithdraw);
+       
         if (_currentBalance >= amountToWithdraw)
         {
             _currentBalance -= amountToWithdraw;
@@ -46,13 +45,7 @@ public class Account
     }
 
     // Helpers, etc. extracted from the above.
-    private void CheckTransactionAmount(decimal amount)
-    {
-        if (amount < 0)
-        {
-            throw new AccountNegativeTransactionAmountException();
-        }
-    }
+   
 }
 
 
