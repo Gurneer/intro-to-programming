@@ -57,5 +57,6 @@ export class NavBarComponent {
   links = signal([
     { path: 'banking', text: 'Banking' },
     { path: 'resources', text: 'Developer Resources' },
+    { path: 'counter', text: 'Counter Demo' },
   ]);
 }

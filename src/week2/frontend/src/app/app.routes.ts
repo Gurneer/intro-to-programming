@@ -12,6 +12,11 @@ export const routes: Routes = [
       import('./banking/banking.routes').then((r) => r.BANKING_ROUTES), // lazy loading, more later.
   },
   {
+    path: 'counter',
+    loadChildren: () =>
+      import('./counter/counter.routes').then((r) => r.COUNTER_ROUTES),
+  },
+  {
     path: 'resources',
     loadChildren: () =>
       import('./resources/resources.routes').then((r) => r.RESOURCES_ROUTES),

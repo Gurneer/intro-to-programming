@@ -1,13 +1,19 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ListComponent } from './components/list.component';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { ResourceDataService } from './services/resource-data.service';
+import { ResourceStore } from './services/resource.store';
 
 @Component({
   selector: 'app-resources',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ListComponent],
+  imports: [RouterLink, RouterOutlet],
+  providers: [ResourceStore, ResourceDataService],
   template: `
     <p>Developer Resources</p>
-    <app-resources-list />
+    <a routerLink="create" class="btn btn-primary">Add A Resource</a>
+    <a routerLink="list" class="btn btn-primary">List Of Resources</a>
+
+    <router-outlet />
   `,
   styles: ``,
 })
