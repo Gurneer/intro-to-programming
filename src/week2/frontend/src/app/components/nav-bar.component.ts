@@ -48,7 +48,9 @@ import { LoginStatusComponent } from './login-status.component';
           }
         </ul>
       </div>
-      <div class="navbar-end"><app-login-status /></div>
+      <div class="navbar-end">
+        <app-login-status />
+      </div>
     </div>
   `,
   styles: ``,
