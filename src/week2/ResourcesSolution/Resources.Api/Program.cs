@@ -1,3 +1,7 @@
+using FluentValidation;
+using Marten;
+using Resources.Api.Resources;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,6 +21,13 @@ builder.Services.AddCors(options =>
   });
 });
 
+builder.Services.AddScoped<IValidator<ResourceListItemCreateModel>, ResourceListItemCreateModelValidationsService>();
+builder.Services.AddScoped<UserInformationProvider>(); // tells the API that if you need to inject this somewhere, (class, method) it's cool with us.
+var connectionString = builder.Configuration.GetConnectionString("resources") ?? throw new Exception("No Connection String Found! Bailing!");
+builder.Services.AddMarten(options =>
+{
+  options.Connection(connectionString);
+}).UseLightweightSessions();
 var app = builder.Build();
 
 app.UseCors();
@@ -28,6 +39,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 
+// This uses "reflection" to scan our entire project and create the route table based on attributes.
 app.MapControllers();
 
 app.Run();

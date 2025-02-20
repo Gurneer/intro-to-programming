@@ -15,7 +15,6 @@ describe('Making Tags', () => {
 
   it('Can Make Some Tags Empty should return an Empty Array', () => {
     const results = tagMaker('');
-    // blah
 
     expect(results).toEqual([]);
   });
